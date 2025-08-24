@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lovely Table</title>
+    <script type="module" src="/src/index.ts"></script>
+  </head>
+  <body>
+    <ux-datatable id="table"></ux-datatable>
+
+    <script type="module">
+      const table = document.getElementById('table');
+
+      table.columns = [
+        { key: 'avatar', label: 'Foto', width: '64px', type: 'image' },
+        { key: 'name', label: 'Nombre' },
+        { key: 'email', label: 'Email' },
+        { key: 'role', label: 'Rol' }
+      ];
+
+      table.data = Array.from({ length: 25 }).map((_, i) => ({
+        id: i + 1,
+        avatar: `https://picsum.photos/seed/${i}/64`,
+        name: `Usuario ${i + 1}`,
+        email: `usuario${i + 1}@correo.com`,
+        role: i % 2 === 0 ? 'Admin' : 'User',
+        disabled: i % 5 === 0,
+        children: i % 3 === 0 ? [
+          { id: `c${i}-1`, avatar: `https://picsum.photos/seed/c${i}/64`, name: 'Detalle 1', email: 'detalle@example.com', role: 'Extra' }
+        ] : undefined
+      }));
+
+      table.addEventListener('cell-click', e => {
+        console.log('Celda clicada:', e.detail);
+      });
+    </script>
+  </body>
+</html>
