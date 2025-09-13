@@ -10,7 +10,7 @@ export class UxDataTableRow extends LitElement {
 
   static styles = css`
     :host {
-      display: table-row-group;
+          display: contents;
     }
     tr {
       cursor: pointer;

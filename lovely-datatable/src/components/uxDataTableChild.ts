@@ -9,7 +9,7 @@ export class UxDataTableChild extends LitElement {
 
   static styles = css`
     :host {
-      display: table-row-group; /* mantiene el comportamiento de fila */
+      display: contents;
     }
     td {
       background: #fafafa;
