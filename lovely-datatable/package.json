@@ -1,13 +1,28 @@
 {
-  "name": "lovely-datatable",
+  "name": "lovely-table",
   "version": "1.0.0",
   "description": "custom datatable component",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/uxDataTable.umd.js",
+  "module": "dist/uxDataTable.es.js",
+  "types": "dist/types/uxDataTable.d.ts",
+  
+  "files": [
+    "dist"
+  ],
+  
+  "exports": {
+    ".": {
+      "import": "./dist/uxDataTable.es.js",
+      "require": "./dist/uxDataTable.umd.js",
+      "types": "./dist/types/uxDataTable.d.ts"
+    }
+  },
+  
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:types": "tsc --emitDeclarationOnly --project tsconfig.json --outDir dist/types",
+    "build:js": "vite build",
+    "build": "npm run build:types && npm run build:js",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build"
@@ -16,7 +31,8 @@
     "web-components",
     "lit",
     "datatable",
-    "table"
+    "table",
+    "lovely-table"
   ],
   "author": "Jud Vazba",
   "license": "MIT",
@@ -26,13 +42,6 @@
   "devDependencies": {
     "@types/node": "^24.2.1",
     "typescript": "^5.9.2",
-    "vite": "^7.1.1",
-    "vite-plugin-dts": "^4.5.4"
-  },
- "files": [
-    "ux-datatable.es.js",
-    "ux-datatable.umd.js",
-    "index.d.ts",
-    "components"
-  ]
+    "vite": "^7.1.1"
+  }
 }

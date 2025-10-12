@@ -10,7 +10,7 @@ import { tableStyles } from '../styles/tableStyles.js';
 
 import { TableColumn, TableRow } from './types.js';
 
-@customElement('ux-datatable')
+@customElement('lovely-datatable')
 export class UxDataTable extends LitElement {
     @property({ type: Array }) columns: TableColumn[] = [];
     @property({ type: Array }) data: TableRow[] = [];
