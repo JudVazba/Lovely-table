@@ -1,21 +1,30 @@
+
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
+import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [dts()],
   build: {
     lib: {
-      entry: 'src/index.ts',
-      name: 'UxDataTable',
-      fileName: (format) => `ux-datatable.${format}.js`
+      entry: resolve(__dirname, 'src/components/uxDataTable.ts'),
+      name: 'UxDataTableComponent',
+      fileName: (format) => `uxDataTable.${format}.js`,
+      formats: ['es', 'umd']
     },
     rollupOptions: {
-      external: ['lit'],
-      output: {
-        globals: {
-          lit: 'Lit'
+        external: [
+            'lit', 
+            'lit/decorators.js', 
+            'lit/directives/repeat.js', 
+            'lit/directives/class-map.js'
+        ],
+        output: {
+            globals: {
+                lit: 'Lit',
+                'lit/decorators.js': 'LitDecorators',
+                'lit/directives/repeat.js': 'LitRepeat',
+                'lit/directives/class-map.js': 'LitClassMap'
+            }
         }
-      }
     }
   }
 });

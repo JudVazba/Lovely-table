@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo 3: Tabla Vacía</title>
+    
+    <script type="module" src="/src/index.ts"></script>
+</head>
+<body>
+    <h1>Demo 3: Tabla Vacía (Muestra Mensaje)</h1>
+
+    <ux-datatable id="table-empty"></ux-datatable>
+
+    <script type="module">
+        const table = document.getElementById('table-empty');
+
+        // Columnas (deben definirse incluso si la tabla está vacía)
+        table.columns = [
+            { key: 'id', label: 'ID' },
+            { key: 'name', label: 'Nombre' },
+            { key: 'email', label: 'Email' }
+        ];
+
+        // Personalización del mensaje de vacío
+        table.emptyDataText = "🚨 No se encontraron resultados que coincidan con los criterios de búsqueda.";
+
+        // Datos vacíos
+        table.data = []; 
+        
+        // Opcional: Desactivamos el icono (aunque con datos vacíos no aparece de todas formas)
+        table.showExpanderIcon = false;
+    </script>
+</body>
+</html>

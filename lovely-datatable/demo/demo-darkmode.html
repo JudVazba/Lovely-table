@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo 4: Tema Oscuro (Dark Mode)</title>
+    
+    <style>
+        body { 
+            background-color: #121212; /* Fondo muy oscuro */
+            color: #e0e0e0; /* Texto claro */
+            font-family: 'Roboto Mono', monospace;
+            padding: 20px;
+        }
+        h1 { color: #81d4fa; } /* Azul claro para el título */
+
+        /* 1. Estilos Globales: Personalización de Variables CSS */
+        ux-datatable {
+            /* FONDOS Y BORDES */
+            --lovely-dt-border-color: #333; 
+            --lovely-dt-row-bg-odd: #1e1e1e; /* Fila oscura */
+            --lovely-dt-row-bg-even: #2c2c2c; /* Fila ligeramente más clara */
+            --lovely-dt-row-bg-child: #3a3a3a; /* Fila hija oscura */
+            
+            /* FUENTE Y COLOR GENERAL */
+            --lovely-dt-row-font-family: inherit;
+
+            /* Sobrescribir el color del icono (usaremos el color neón) */
+            --lovely-dt-expander-icon-color: #00bcd4; /* Cian neón */
+            
+            /* Ajuste de color dentro del Shadow DOM */
+            color: #e0e0e0; /* Forzamos el texto interno a ser claro */
+        }
+        /* Esto es necesario para dar estilo al TH (encabezado) ya que no tiene variable de fondo */
+        ux-datatable::part(th) {
+             background-color: #004d40; /* Verde oscuro para encabezados */
+        }
+
+    </style>
+    
+    <script type="module" src="/src/index.ts"></script> 
+</head>
+<body>
+    <h1>Demo 4: Tema Oscuro y Expansible</h1>
+    <p>La tabla utiliza una combinación de colores oscuros y un borde sutil.</p>
+
+    <ux-datatable id="table-dark"></ux-datatable>
+
+    <script type="module">
+        const table = document.getElementById('table-dark');
+
+        // Columnas
+        table.columns = [
+            { key: 'id', label: 'ID', width: '64px' },
+            { key: 'system', label: 'Sistema', width: '35%' },
+            { key: 'status', label: 'Estado' },
+            { key: 'priority', label: 'Prioridad', width: '15%' }
+        ];
+
+        // Configuración del icono
+        table.showExpanderIcon = true;
+        table.expanderIconColor = '#00bcd4'; // Cian neón (se repite la variable por si el CSS no la coge)
+        table.expanderIconPosition = 'last'; 
+
+        // Datos con jerarquía
+        table.data = [
+            { 
+                id: 101, system: 'Servidor Principal (AWS)', status: 'Activo', priority: 'Alta',
+                children: [
+                    { id: 101.1, system: '— Microservicio API Gateway', status: 'Activo', priority: 'Media' },
+                    { id: 101.2, system: '— Base de Datos PostgreSQL', status: 'Inestable', priority: 'Alta' }
+                ]
+            },
+            { id: 102, system: 'Sistema de Backups', status: 'Desconectado', priority: 'Crítica' },
+            { id: 103, system: 'Servidor Web Front-end', status: 'Activo', priority: 'Media' },
+            { 
+                id: 104, system: 'Contabilidad (ERP)', status: 'Activo', priority: 'Baja',
+                children: [
+                    { id: 104.1, system: '— Módulo de Facturación', status: 'Activo', priority: 'Baja' }
+                ]
+            }
+        ];
+    </script>
+</body>
+</html>

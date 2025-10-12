@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo 8: Personalización Extrema y Máximas Columnas</title>
+    
+    <style>
+        body { 
+            font-family: 'Courier New', Courier, monospace; /* Fuente retro */
+            background-color: #282c34; /* Fondo oscuro global */
+            color: #fff;
+            padding: 20px;
+        }
+        h1 { color: #61dafb; border-bottom: 2px solid #61dafb; padding-bottom: 5px; }
+
+        /* PERSONALIZACIÓN EXTREMA DE TODAS LAS VARIABLES CSS */
+        ux-datatable {
+            /* 1. BORDES Y FUENTE */
+            --lovely-dt-border-color: #ff5500; /* Naranja/rojo fuerte */
+            --lovely-dt-row-font-family: 'Courier New', monospace;
+
+            /* 2. COLORES DE FILA BASE */
+            --lovely-dt-row-bg-odd: #3e4451;    /* Gris oscuro */
+            --lovely-dt-row-bg-even: #282c34;   /* Muy oscuro (casi negro) */
+            
+            /* 3. COLORES DE FILA HIJA Y HOVER */
+            --lovely-dt-row-bg-child: #4b5263;  /* Gris medio para el hijo */
+            --lovely-dt-row-bg-hover: #ffcc00;  /* ¡Amarillo brillante para el hover! */
+            
+            /* 4. COLORES DE ICONO */
+            --lovely-dt-expander-icon-color: #00ff00; /* Verde neón para el icono */
+            
+            /* Ajuste de texto general (útil en dark mode) */
+            color: #dcdcdc; 
+        }
+
+        /* Ajustes adicionales fuera de las variables para el encabezado */
+        ux-datatable::part(th) {
+             background-color: #ff5500; /* Encabezado naranja fuerte */
+             color: #000;
+             font-weight: bold;
+        }
+
+    </style>
+    
+    <script type="module" src="/src/index.ts"></script> 
+</head>
+<body>
+    <h1>Demo 8: Personalización Extrema (Estilo Retro Dark Mode)</h1>
+    <p>Esta tabla sobrescribe todas las variables CSS. ¡Pasa el ratón para ver el hover amarillo!</p>
+
+    <ux-datatable id="table-max-custom"></ux-datatable>
+
+    <script type="module">
+        const table = document.getElementById('table-max-custom');
+
+        // Definición de MÁXIMAS Columnas (8 columnas)
+        table.columns = [
+            { key: 'id', label: 'ID', width: '5%' },
+            { key: 'client', label: 'Cliente', width: '15%' },
+            { key: 'project', label: 'Proyecto', width: '20%' },
+            { key: 'manager', label: 'Manager', width: '10%' },
+            { key: 'budget', label: 'Presupuesto' },
+            { key: 'progress', label: 'Progreso', width: '10%' },
+            { key: 'status', label: 'Estado', width: '10%' },
+            { key: 'priority', label: 'Prioridad', width: '10%' },
+        ];
+
+        // Configuración de Expansión
+        table.showExpanderIcon = true;
+        table.expanderIconPosition = 'first'; 
+
+        // Datos con jerarquía para probar colores de fila hija
+        table.data = [
+            { 
+                id: 1, client: 'Alpha Solutions', project: 'API Backend V2', manager: 'C. Smith', budget: '$85,000', progress: '75%', status: 'Activo', priority: 'Alta',
+                children: [
+                    { id: 1.1, client: '— Tarea DB', project: 'Diseño Esquema', manager: 'J. Doe', budget: '$5,000', progress: '100%', status: 'Completado', priority: 'Media' },
+                    { id: 1.2, client: '— Tarea UI', project: 'Prototipo Dashboard', manager: 'L. Green', budget: '$10,000', progress: '50%', status: 'En Pausa', priority: 'Alta' }
+                ]
+            },
+            { 
+                id: 2, client: 'Beta Analytics', project: 'Informe Q4', manager: 'A. Black', budget: '$12,000', progress: '90%', status: 'Cerrando', priority: 'Media',
+                children: [
+                    { id: 2.1, client: '— Revisión', project: 'Revisión Legal', manager: 'M. White', budget: '$2,000', progress: '10%', status: 'Pendiente', priority: 'Baja' }
+                ]
+            },
+            { id: 3, client: 'Gamma Inc.', project: 'Landing Page', manager: 'C. Smith', budget: '$4,000', progress: '100%', status: 'Completado', priority: 'Baja' }
+        ];
+
+        // Evento de hover simple para console.log (opcional)
+        table.onRowMouseEnter = (row) => {
+            console.log('HOVER: ¡Bienvenido al proyecto:', row.project, '!');
+        };
+    </script>
+</body>
+</html>

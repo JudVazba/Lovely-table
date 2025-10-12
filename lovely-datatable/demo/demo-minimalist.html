@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo 5: Diseño Minimalista</title>
+    
+    <style>
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            background-color: #f4f4f9;
+        }
+        h1 { color: #333; }
+
+        /* 1. Estilos Globales: Personalización de Variables CSS */
+        ux-datatable {
+            /* BORDES (Clave para el minimalismo: Bordes transparentes o muy claros) */
+            --lovely-dt-border-color: #eee; /* Borde muy sutil (casi invisible) */
+            
+            /* FONDOS */
+            --lovely-dt-row-bg-odd: #ffffff; /* Blanco */
+            --lovely-dt-row-bg-even: #f9f9f9; /* Gris muy claro */
+            --lovely-dt-row-bg-child: #f0f0f0; /* Gris ligeramente más oscuro */
+
+            /* Ajuste de color dentro del Shadow DOM */
+            color: #444; 
+        }
+
+        /* Eliminamos el borde de la tabla (y solo dejamos el separador de filas) */
+        ux-datatable::part(table) {
+             border: none;
+        }
+        /* Damos un color sólido al fondo del TH para que se destaque un poco */
+        ux-datatable::part(th) {
+             background-color: #e0e0e0; 
+             border: none; /* Quitamos bordes de las cabeceras */
+        }
+        
+        /* Opcional: Estilo para las filas (simulando un separador) */
+        ux-datatable tr {
+            border-bottom: 1px solid #ddd; /* Separador de filas */
+        }
+        /* Quitamos el borde de las celdas (TD) */
+        ux-datatable td {
+            border: none;
+        }
+    </style>
+    
+    <script type="module" src="/src/index.ts"></script> 
+</head>
+<body>
+    <h1>Demo 5: Diseño Minimalista (Sin Bordes de Celdas)</h1>
+    <p>Solo se utiliza un separador de fila sutil (variable <code>--lovely-dt-border-color</code> a un gris muy claro).</p>
+
+    <ux-datatable id="table-minimal"></ux-datatable>
+
+    <script type="module">
+        const table = document.getElementById('table-minimal');
+
+        // Columnas
+        table.columns = [
+            { key: 'sku', label: 'SKU', width: '15%' },
+            { key: 'description', label: 'Descripción' },
+            { key: 'category', label: 'Categoría', width: '20%' },
+            { key: 'stock', label: 'Stock', width: '10%' }
+        ];
+
+        // Datos simples (no expandibles)
+        table.data = [
+            { id: 1, sku: 'ELX-900', description: 'Auriculares Inalámbricos con cancelación de ruido', category: 'Electrónica', stock: 120 },
+            { id: 2, sku: 'KIT-045', description: 'Kit de Herramientas de Precisión', category: 'Bricolaje', stock: 55 },
+            { id: 3, sku: 'LIB-302', description: 'Novela de Ciencia Ficción (Edición Limitada)', category: 'Libros', stock: 12 },
+            { id: 4, sku: 'HOG-770', description: 'Robot Aspirador con mapeo láser', category: 'Hogar', stock: 88 },
+            { id: 5, sku: 'ELX-901', description: 'Base de carga rápida para Auriculares', category: 'Electrónica', stock: 200 }
+        ];
+
+        // Desactivamos el icono expansor
+        table.showExpanderIcon = false;
+    </script>
+</body>
+</html>

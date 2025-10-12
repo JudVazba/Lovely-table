@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo 2: Filas Expandibles Anidadas</title>
+    
+    <style>
+        body { font-family: sans-serif; }
+        ux-datatable {
+            /* Personalización del color del icono y el fondo de la fila hija */
+            --lovely-dt-border-color: #5d4037; /* Marrón */
+            --lovely-dt-row-bg-even: #efebe9; /* Fondo de fila par */
+            --lovely-dt-row-bg-child: #fbe9e7; /* Fondo de fila hija (Rosa pálido) */
+        }
+    </style>
+    
+    <script type="module" src="/src/index.ts"></script>
+</head>
+<body>
+    <h1>Demo 2: Filas Expandibles y Control de Iconos</h1>
+
+    <ux-datatable id="table-expandable"></ux-datatable>
+
+    <script type="module">
+        const table = document.getElementById('table-expandable');
+
+        // Columnas
+        table.columns = [
+            { key: 'client', label: 'Cliente' },
+            { key: 'status', label: 'Estado del Proyecto', width: '20%' },
+            { key: 'dueDate', label: 'Fecha Límite', width: '20%' },
+            { key: 'manager', label: 'Gerente', width: '20%' }
+        ];
+
+        // Configuración del icono
+        table.showExpanderIcon = true;
+        table.expanderIconColor = '#ff5722'; // Naranja brillante
+        table.expanderIconPosition = 'first'; // Ícono al inicio (Prueba con 'last')
+
+        // Datos de ejemplo con jerarquía (children)
+        table.data = [
+            { 
+                id: 'p1', client: 'Alpha Corp', status: 'En Curso', dueDate: '2025-12-15', manager: 'Carlos M.',
+                children: [
+                    { id: 't1', client: '— Tarea UX/UI', status: 'Pendiente', dueDate: '2025-10-20', manager: 'Ana S.' },
+                    { id: 't2', client: '— Tarea Backend', status: 'Completado', dueDate: '2025-11-01', manager: 'Javi R.' }
+                ]
+            },
+            { id: 'p2', client: 'Beta Systems', status: 'Retrasado', dueDate: '2025-09-30', manager: 'Laura G.' },
+            { 
+                id: 'p3', client: 'Gamma Ventures', status: 'Completado', dueDate: '2025-08-01', manager: 'Carlos M.',
+                children: [
+                    { id: 't3', client: '— Tarea Final Docs', status: 'Completado', dueDate: '2025-08-15', manager: 'Ana S.' }
+                ]
+            },
+            { id: 'p4', client: 'Delta Energy', status: 'Pendiente', dueDate: '2026-01-01', manager: 'Laura G.' }
+        ];
+    </script>
+</body>
+</html>

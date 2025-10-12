@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo 1: Tabla Básica y Eventos</title>
+    
+    <style>
+        body { font-family: sans-serif; }
+        ux-datatable {
+            /* Personalización del borde y colores de fondo */
+            --lovely-dt-border-color: #00796b; /* Verde oscuro */
+            --lovely-dt-row-bg-even: #e0f2f1; /* Fondo de fila par (Verde claro) */
+            --lovely-dt-row-bg-odd: #ffffff;
+            --lovely-dt-row-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+            /* Ocultamos el icono para esta demo, ya que no hay datos anidados */
+            --lovely-dt-row-bg-child: #f0f4f7;
+        }
+    </style>
+    
+    <script type="module" src="/src/index.ts"></script> 
+</head>
+<body>
+    <h1>Demo 1: Datos Básicos, Tipos y Eventos</h1>
+    <p>Revisa la consola del navegador (F12) para ver los eventos de click y hover.</p>
+
+    <ux-datatable id="table-basic"></ux-datatable>
+
+    <script type="module">
+        const table = document.getElementById('table-basic');
+
+        // Columnas
+        table.columns = [
+            { key: 'avatar', label: 'Foto', width: '64px', type: 'image' },
+            { key: 'product', label: 'Producto', width: '30%' },
+            { key: 'price', label: 'Precio' },
+            { key: 'units', label: 'Unidades', width: '10%' }
+        ];
+
+        // Datos de ejemplo
+        table.data = [
+            { id: 1, avatar: 'https://picsum.photos/seed/p1/64', product: 'Laptop Gaming Pro', price: '$1299.99', units: 5 },
+            { id: 2, avatar: 'https://picsum.photos/seed/p2/64', product: 'Teclado Mecánico RGB', price: '$85.00', units: 12 },
+            { id: 3, avatar: 'https://picsum.photos/seed/p3/64', product: 'Monitor Curvo Ultra HD', price: '$450.50', units: 8 },
+            { id: 4, avatar: 'https://picsum.photos/seed/p4/64', product: 'Webcam 4K', price: '$45.00', units: 0 }, // Unidades en 0 para probar valor
+            { id: 5, avatar: 'https://picsum.photos/seed/p5/64', product: 'Mouse Inalámbrico', price: '$19.99', units: 35 }
+        ];
+
+        // Eventos
+        table.onRowClick = (row) => {
+            console.log('ROW CLICK (Fila completa):', row.product);
+        };
+        table.onCellClick = (data) => {
+            console.log(`CELL CLICK (Celda): ${data.column.label} = ${data.value}`);
+        };
+        table.onRowMouseEnter = (row) => {
+            console.log('ROW HOVER: En fila', row.id);
+        };
+
+        // Desactivamos el icono expansor ya que no hay hijos
+        table.showExpanderIcon = false;
+    </script>
+</body>
+</html>
