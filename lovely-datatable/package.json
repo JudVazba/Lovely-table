@@ -1,6 +1,6 @@
 {
   "name": "lovely-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "custom datatable component",
   "main": "dist/uxDataTable.umd.js",
   "module": "dist/uxDataTable.es.js",
