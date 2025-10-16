@@ -2,7 +2,7 @@
 
 A highly customizable, responsive, and accessible data table **Web Component** built with **Lit** and **TypeScript**. This component is designed to handle modern web applications, supporting features like **hierarchical data** (expandable rows) and extensive **CSS variable customization**, including sophisticated hover effects.
 
-[![npm version](https://badge.fury.io/js/lovely-datatable-component.svg)](https://www.npmjs.com/package/lovely-datatable-component)
+[![npm version](https://badge.fury.io/js/lovely-datatable.svg)](https://www.npmjs.com/package/lovely-datatable)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 ---
@@ -12,7 +12,7 @@ A highly customizable, responsive, and accessible data table **Web Component** b
 Install the component using npm. This package includes the compiled JavaScript required for any web project.
 
 ```bash
-npm install lovely-datatable-component
+npm install lovely-datatable
 
 
  ##🚀 Usage

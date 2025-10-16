@@ -1,32 +1,26 @@
-// vite.config.ts
+// vite.config.ts (DE TU PROYECTO DE PRUEBA/DEMO)
 
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
+  // Desactivamos la limpieza solo para asegurar que los archivos del build de la librería no se borren
   build: {
-    lib: {
-      entry: resolve(__dirname, 'src/components/uxDataTable.ts'),
-      name: 'LovelyTable',
-      fileName: (format) => `uxDataTable.${format}.js`,
-      formats: ['es', 'umd']
-    },
+    emptyOutDir: false, 
+    
+    // CONFIGURACIÓN CLAVE PARA MÚLTIPLES PÁGINAS (Rollup Options)
     rollupOptions: {
-      external: [
-        'lit', 
-        'lit/decorators.js', 
-        'lit/directives/repeat.js', 
-        'lit/directives/class-map.js',
-        'lit/directives/style-map.js'
-      ],
-      output: {
-        globals: {
-          lit: 'Lit',
-          'lit/decorators.js': 'LitDecorators',
-          'lit/directives/repeat.js': 'LitRepeat',
-          'lit/directives/class-map.js': 'LitClassMap',
-          'lit/directives/style-map.js': 'LitStyleMap'
-        }
+      input: {
+        // 1. Entrada principal
+        main: resolve(__dirname, 'index.html'),
+        
+        // 2. Entradas de las demos (¡AÑADE TODAS LAS QUE NECESITES AQUÍ!)
+        demo_pastel: resolve(__dirname, 'demos/demo-pastel.html'),
+        demo_dark: resolve(__dirname, 'demos/demo-dark.html'),
+        demo_max: resolve(__dirname, 'demos/demo-max-columns.html'), 
+        
+        // Si tienes más, sigue la misma estructura:
+        // otro_demo: resolve(__dirname, 'demos/nombre-del-archivo.html'),
       }
     }
   }

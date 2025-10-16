@@ -1,21 +1,24 @@
 {
   "name": "lovely-table",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "custom datatable component",
   "main": "dist/uxDataTable.umd.js",
   "module": "dist/uxDataTable.es.js",
-  "types": "dist/types/uxDataTable.d.ts",
+  "types": "dist/types/components/uxDataTable.d.ts", 
   
   "files": [
     "dist"
   ],
-  
   "exports": {
     ".": {
-      "import": "./dist/uxDataTable.es.js",
       "require": "./dist/uxDataTable.umd.js",
-      "types": "./dist/types/uxDataTable.d.ts"
-    }
+      "import": "./dist/uxDataTable.es.js",
+      "types": "./dist/types/components/uxDataTable.d.ts" 
+    },
+    "./types": {
+      "types": "./dist/types/components/types.d.ts" 
+    },
+    "./dist/*": "./dist/*" 
   },
   
   "scripts": {
